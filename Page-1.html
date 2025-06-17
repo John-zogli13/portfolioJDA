@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Développeur Senior & Designer Graphique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3B82F6',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Poppins', sans-serif;
+}
+.skill-bar {
+transition: width 1s ease-in-out;
+}
+.project-card:hover .project-overlay {
+opacity: 1;
+}
+.project-card:hover img {
+transform: scale(1.05);
+}
+input[type="range"]::-webkit-slider-thumb {
+appearance: none;
+width: 20px;
+height: 20px;
+background: #3B82F6;
+border-radius: 50%;
+cursor: pointer;
+}
+input[type="checkbox"] {
+appearance: none;
+}
+.custom-checkbox {
+position: relative;
+width: 20px;
+height: 20px;
+border: 2px solid #3B82F6;
+border-radius: 4px;
+cursor: pointer;
+}
+.custom-checkbox::after {
+content: "";
+position: absolute;
+display: none;
+left: 6px;
+top: 2px;
+width: 6px;
+height: 12px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+input[type="checkbox"]:checked + .custom-checkbox {
+background-color: #3B82F6;
+}
+input[type="checkbox"]:checked + .custom-checkbox::after {
+display: block;
+}
+.hero-gradient {
+background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+}
+.nav-link {
+position: relative;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+width: 0;
+height: 2px;
+bottom: -4px;
+left: 0;
+background-color: #3B82F6;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+width: 100%;
+}
+.active-nav::after {
+width: 100%;
+}
+/* Modal Styles */
+#projectModal {
+  transition: opacity 0.3s ease-in-out;
+}
+#projectModal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+#projectModal .bg-white {
+  transform: scale(0.95);
+  transition: transform 0.3s ease-in-out;
+}
+#projectModal:not(.hidden) .bg-white {
+  transform: scale(1);
+}
+/* Ensure modal content doesn't overflow */
+#projectModal {
+  align-items: flex-start;
+}
+@media (max-width: 640px) {
+  #projectModal .bg-white {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header/Navigation -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary">John Digit</a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center space-x-8">
+<a href="#accueil" class="nav-link active-nav text-gray-800 hover:text-primary transition-colors">Accueil</a>
+<a href="#projets" class="nav-link text-gray-800 hover:text-primary transition-colors">Projets</a>
+<a href="#competences" class="nav-link text-gray-800 hover:text-primary transition-colors">Compétences</a>
+<a href="#contact" class="nav-link text-gray-800 hover:text-primary transition-colors">Contact</a>
+<a href="CV pdf.pdf" download class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors whitespace-nowrap">
+  Télécharger CV
+</a>
+
+</nav>
+<!-- Mobile Menu Button -->
+<button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+<!-- Mobile Navigation -->
+<nav id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+<div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+<a href="#accueil" class="text-gray-800 hover:text-primary transition-colors py-2">Accueil</a>
+<a href="#projets" class="text-gray-800 hover:text-primary transition-colors py-2">Projets</a>
+<a href="#competences" class="text-gray-800 hover:text-primary transition-colors py-2">Compétences</a>
+<a href="#contact" class="text-gray-800 hover:text-primary transition-colors py-2">Contact</a>
+<a href="#" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap text-center">Télécharger CV</a>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<section id="accueil" class="pt-24 md:pt-32 pb-16 md:pb-24 hero-gradient">
+<div class="container mx-auto px-4 w-full">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-10 md:mb-0">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">John Zogli</h1>
+<h2 class="text-2xl md:text-3xl font-semibold text-primary mb-6">Développeur Junior & Designer Graphique</h2>
+<p class="text-lg text-gray-700 mb-8 max-w-xl">
+Passionné par la création d'expériences web innovantes et intuitives .
+Je combine expertise technique et vision créative pour transformer vos idées en solutions digitales performantes.
+</p>
+<div class="flex flex-wrap gap-4">
+<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap">Me contacter</a>
+<a href="#projets" class="border-2 border-primary text-primary px-8 py-3 !rounded-button hover:bg-blue-50 transition-colors whitespace-nowrap">Voir mes projets</a>
+</div>
+<div class="flex space-x-4 mt-8">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-linkedin-fill text-gray-700"></i>
+</a>
+<a href="https://github.com/John-zogli13" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+  <i class="ri-github-fill text-gray-700 text-xl"></i>
+</a>
+
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-dribbble-fill text-gray-700"></i>
+</a>
+<a href="https://www.behance.net/johnzogli/projects" target="_blank"
+   class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-transform transform hover:scale-110">
+  <i class="ri-behance-fill text-gray-700 text-xl"></i>
+</a>
+
+</div>
+</div>
+<div class="md:w-1/2 flex justify-center md:justify-end">
+<div class="relative">
+<div class="absolute -inset-4 bg-primary rounded-full opacity-10 blur-xl"></div>
+<img
+src="siteprofil john.jpg"
+alt="John Zogli"
+class="w-64 h-64 md:w-80 md:h-80 object-cover object-top rounded-full border-4 border-white shadow-xl relative z-10"
+>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-16 md:py-24 bg-white">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2">
+<img
+src="https://www.campussuddesmetiers.com/wp-content/uploads/2022/05/iStock-1017296544.jpg"
+alt="John travaillant"
+class="w-full h-auto rounded-lg shadow-lg object-cover object-top"
+>
+</div>
+<div class="md:w-1/2">
+<h2 class="text-3xl font-bold text-gray-900 mb-6">À propos de moi</h2>
+<p class="text-lg text-gray-700 mb-6">
+Basé au Togo, je suis un développeur full-stack et designer graphique avec une passion pour la création d'interfaces utilisateur élégantes et fonctionnelles. j'ai travaillé sur une variété de projets allant des applications web complexes aux sites vitrines percutants.
+</p>
+<p class="text-lg text-gray-700 mb-8">
+Mon approche combine rigueur technique et sensibilité esthétique. Je m'efforce de créer des solutions qui non seulement fonctionnent parfaitement, mais qui offrent également une expérience utilisateur exceptionnelle.
+</p>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Formation</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-graduation-cap-fill"></i>
+</span>
+<span>Licence en Développement Web, Université Data 2</span>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-award-fill"></i>
+</span>
+<span>Certification UX Design, Google</span>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Expérience</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-briefcase-fill"></i>
+</span>
+<span>Lead Developer, Agence Digitale Spark</span>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-code-box-fill"></i>
+</span>
+<span>Freelance depuis 2023</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section id="projets" class="py-16 md:py-24 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Mes Projets Récents</h2>
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        Découvrez une sélection de mes travaux récents en développement web et design graphique.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Project 1 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="mèche (2).png"
+            alt="E-commerce Site mèche"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="E-commerce Site mèche"
+               data-description="Refonte complète d'une plateforme e-commerce de produits de luxe avec intégration de paiement et système de gestion de stock avancé."
+               data-image="mèche (2).png"
+               data-tech="React,Node.js,MongoDB">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">E-commerce Site mèche</h3>
+          <p class="text-gray-700 mb-4">Refonte complète d'une plateforme e-commerce de produits de luxe avec intégration de paiement et système de gestion de stock avancé.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Laravel</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Node.js</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">MongoDB</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 2 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="mèche (1).png"
+            alt="Application FitTrack"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="Application FitTrack"
+               data-description="Application mobile de suivi fitness avec visualisation des données, planification d'entraînements et intégration avec appareils connectés."
+               data-image="mèche (1).png"
+               data-tech="Flutter,Firebase,GraphQL">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">E-commerce Site mèche</h3>
+          <p class="text-gray-700 mb-4">Refonte complète d'une plateforme e-commerce de produits de luxe avec intégration de paiement et système de gestion de stock avancé.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Laravel</span>
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Firebase</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">php</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="dam (2).png"
+            alt="Dashboard FinViz"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="Dashboard FinViz"
+               data-description="Tableau de bord analytique pour une entreprise financière avec visualisation de données complexes et rapports personnalisables en temps réel."
+               data-image="dam (2).png"
+               data-tech="Vue.js,D3.js,Express">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Dashboard FinViz</h3>
+          <p class="text-gray-700 mb-4">Tableau de bord analytique pour une entreprise financière avec visualisation de données complexes et rapports personnalisables en temps réel.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Laravel</span>
+            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">D3.js</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">mysql</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 4 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="stock.png"
+            alt="Site Restaurant Gastronomique"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="L'Atelier Gourmand"
+               data-description="Site vitrine pour un restaurant gastronomique avec réservation en ligne, galerie photos et menu interactif optimisé pour mobile."
+               data-image="stock.png"
+               data-tech="HTML/CSS,JavaScript,PHP">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Tableau de bord</h3>
+          <p class="text-gray-700 mb-4">Site vitrine pour un restaurant gastronomique avec réservation en ligne, galerie photos et menu interactif optimisé pour mobile.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Laravel</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 5 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="emp (1).png"
+            alt="Identité Visuelle Agence"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="Gestion d'employé"
+               data-description="Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication."
+               data-image="emp (1).png"
+               data-tech="Illustrator,Photoshop,InDesign">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Gestion d'employé</h3>
+          <p class="text-gray-700 mb-4">Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Laravel</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Php</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">mysql</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 6 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="yomm.jpg"
+            alt="Plateforme E-learning"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="yomm"
+               data-description="Plateforme e-learning complète avec système de cours en ligne, quiz interactifs et suivi de progression des apprenants."
+               data-image="yomm.jpg"
+               data-tech="React,Django,PostgreSQL">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">yomm</h3>
+          <p class="text-gray-700 mb-4">Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Illustrator</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Photoshop</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">InDesign</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 7 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="bon-week-2.png"
+            alt="Plateforme E-learning"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="yomm"
+               data-description="Plateforme e-learning complète avec système de cours en ligne, quiz interactifs et suivi de progression des apprenants."
+               data-image="bon-week-2.png"
+               data-tech="React,Django,PostgreSQL">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Bon week-end</h3>
+          <p class="text-gray-700 mb-4">Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Illustrator</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Photoshop</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">InDesign</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 8 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="1er-mai-2025.png"
+            alt="Plateforme E-learning"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="yomm"
+               data-description="Plateforme e-learning complète avec système de cours en ligne, quiz interactifs et suivi de progression des apprenants."
+               data-image="1er-mai-2025.png"
+               data-tech="React,Django,PostgreSQL">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Fête du travail</h3>
+          <p class="text-gray-700 mb-4">Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Illustrator</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Photoshop</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">InDesign</span>
+          </div>
+        </div>
+      </div>
+      <!-- Project 9 -->
+      <div class="project-card bg-white rounded-lg shadow-md overflow-hidden group">
+        <div class="relative overflow-hidden h-64">
+          <img
+            src="septebrrr2.png"
+            alt="Plateforme E-learning"
+            class="w-full h-full object-contain object-top transition-transform duration-500"
+          >
+          <div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <a href="#" class="bg-white text-primary px-6 py-2 !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap open-modal"
+               data-title="yomm"
+               data-description="Plateforme e-learning complète avec système de cours en ligne, quiz interactifs et suivi de progression des apprenants."
+               data-image="septebrrr2.png"
+               data-tech="React,Django,PostgreSQL">Voir le projet</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Fin du mois</h3>
+          <p class="text-gray-700 mb-4">Création complète de l'identité visuelle pour une agence créative, incluant logo, charte graphique et supports de communication.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Illustrator</span>
+            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Photoshop</span>
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">InDesign</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="/projets.html" class="inline-flex items-center text-primary hover:text-blue-700 transition-colors">
+        <span class="mr-2">Voir tous les projets</span>
+        <i class="ri-arrow-right-line"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Structure -->
+<div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 overflow-y-auto py-4">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-[90vw] sm:max-w-2xl lg:max-w-4xl mx-auto p-4 sm:p-6 relative">
+    <button id="closeModal" class="absolute top-2 right-2 sm:top-4 sm:right-4 text-gray-600 hover:text-gray-900 w-10 h-10 flex items-center justify-center" aria-label="Close">
+      <i class="ri-close-line text-xl sm:text-2xl"></i>
+    </button>
+    <div class="flex flex-col lg:flex-row gap-4 sm:gap-6">
+      <div class="w-full lg:w-1/2">
+        <img id="modalImage" src="" alt="Project Image" class="w-full h-48 sm:h-64 lg:h-96 object-contain rounded-lg">
+      </div>
+      <div class="w-full lg:w-1/2">
+        <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-4"></h3>
+        <p id="modalDescription" class="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6"></p>
+        <div id="modalTech" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Skills Section -->
+<section id="competences" class="py-16 md:py-24 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Mes Compétences</h2>
+<p class="text-lg text-gray-700 max-w-2xl mx-auto">
+Un aperçu des technologies et outils que j'utilise quotidiennement pour créer des expériences web exceptionnelles.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Frontend Skills -->
+<div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-4">
+<i class="ri-code-s-slash-line ri-xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-gray-900">Frontend</h3>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">HTML/CSS</span>
+<span class="text-sm text-gray-500">95%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-primary rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">JavaScript</span>
+<span class="text-sm text-gray-500">90%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-primary rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">React</span>
+<span class="text-sm text-gray-500">85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Vue.js</span>
+<span class="text-sm text-gray-500">80%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-primary rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Tailwind/SCSS</span>
+<span class="text-sm text-gray-500">90%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-primary rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Backend Skills -->
+<div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-secondary mr-4">
+<i class="ri-server-line ri-xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-gray-900">Backend</h3>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Node.js</span>
+<span class="text-sm text-gray-500">85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-secondary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">PHP/Laravel</span>
+<span class="text-sm text-gray-500">80%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-secondary rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Python/Django</span>
+<span class="text-sm text-gray-500">75%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-secondary rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">SQL/NoSQL</span>
+<span class="text-sm text-gray-500">85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-secondary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">API/GraphQL</span>
+<span class="text-sm text-gray-500">80%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-secondary rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Design Skills -->
+<div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mr-4">
+<i class="ri-palette-line ri-xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-gray-900">Design</h3>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">UI/UX Design</span>
+<span class="text-sm text-gray-500">90%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-purple-600 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Figma</span>
+<span class="text-sm text-gray-500">95%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-purple-600 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Adobe Suite</span>
+<span class="text-sm text-gray-500">85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-purple-600 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Motion Design</span>
+<span class="text-sm text-gray-500">70%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-purple-600 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-medium text-gray-700">Design System</span>
+<span class="text-sm text-gray-500">85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="skill-bar h-full bg-purple-600 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Skills -->
+<div class="mt-16">
+<h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Autres Compétences</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="bg-gray-50 rounded-lg p-6 text-center shadow-sm">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-primary mx-auto mb-4">
+<i class="ri-git-branch-line ri-xl"></i>
+</div>
+<h4 class="text-lg font-semibold text-gray-900 mb-2">Git/GitHub</h4>
+<p class="text-gray-700">Gestion de versions et collaboration</p>
+</div>
+<div class="bg-gray-50 rounded-lg p-6 text-center shadow-sm">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-primary mx-auto mb-4">
+<i class="ri-cloud-line ri-xl"></i>
+</div>
+<h4 class="text-lg font-semibold text-gray-900 mb-2">AWS/Azure</h4>
+<p class="text-gray-700">Déploiement et infrastructure cloud</p>
+</div>
+<div class="bg-gray-50 rounded-lg p-6 text-center shadow-sm">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-primary mx-auto mb-4">
+<i class="ri-test-tube-line ri-xl"></i>
+</div>
+<h4 class="text-lg font-semibold text-gray-900 mb-2">Tests Unitaires</h4>
+<p class="text-gray-700">Jest, Cypress, PHPUnit</p>
+</div>
+<div class="bg-gray-50 rounded-lg p-6 text-center shadow-sm">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-primary mx-auto mb-4">
+<i class="ri-user-voice-line ri-xl"></i>
+</div>
+<h4 class="text-lg font-semibold text-gray-900 mb-2">Gestion de Projet</h4>
+<p class="text-gray-700">Agile, Scrum, Kanban</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-16 md:py-24 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ce Que Disent Mes Clients</h2>
+<p class="text-lg text-gray-700 max-w-2xl mx-auto">
+Découvrez les retours de clients avec qui j'ai eu le plaisir de collaborer sur divers projets.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-white rounded-lg p-8 shadow-md">
+<div class="flex items-center mb-6">
+<div class="text-primary">
+<i class="ri-double-quotes-l ri-3x"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">
+John a complètement transformé notre présence en ligne. Son expertise en développement et en design nous a permis de créer une plateforme e-commerce qui a dépassé toutes nos attentes, tant en termes d'esthétique que de performances.
+</p>
+<div class="flex items-center">
+<img
+src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20business%20woman%20in%20her%2040s%20with%20short%20blonde%20hair%2C%20wearing%20business%20attire%2C%20neutral%20background%2C%20confident%20expression%2C%20high%20quality%20portrait&width=100&height=100&seq=testimonial1&orientation=squarish"
+alt="Sophie Moreau"
+class="w-12 h-12 rounded-full object-cover object-top mr-4"
+>
+<div>
+<h4 class="font-semibold text-gray-900">Sophie Moreau</h4>
+<p class="text-sm text-gray-600">Directrice, Luxoria</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white rounded-lg p-8 shadow-md">
+<div class="flex items-center mb-6">
+<div class="text-primary">
+<i class="ri-double-quotes-l ri-3x"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">
+Travailler avec John a été une expérience exceptionnelle. Sa capacité à comprendre nos besoins et à les traduire en solutions techniques innovantes a été impressionnante. Il a livré notre application mobile dans les délais et avec une qualité irréprochable.
+</p>
+<div class="flex items-center">
+<img
+src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20business%20man%20in%20his%2030s%20with%20dark%20hair%20and%20beard%2C%20wearing%20casual%20business%20attire%2C%20neutral%20background%2C%20friendly%20smile%2C%20high%20quality%20portrait&width=100&height=100&seq=testimonial2&orientation=squarish"
+alt="Antoine Lefèvre"
+class="w-12 h-12 rounded-full object-cover object-top mr-4"
+>
+<div>
+<h4 class="font-semibold text-gray-900">Antoine Lefèvre</h4>
+<p class="text-sm text-gray-600">Fondateur, FitTrack</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-white rounded-lg p-8 shadow-md">
+<div class="flex items-center mb-6">
+<div class="text-primary">
+<i class="ri-double-quotes-l ri-3x"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">
+L'expertise de John en matière de design UX a complètement transformé notre plateforme éducative. Son approche centrée sur l'utilisateur et son souci du détail ont permis de créer une expérience d'apprentissage fluide et engageante pour nos étudiants.
+</p>
+<div class="flex items-center">
+<img
+src="siteprofil john.jpg"
+alt="Isabelle Dupont"
+class="w-12 h-12 rounded-full object-cover object-top mr-4"
+>
+<div>
+<h4 class="font-semibold text-gray-900">Isabelle Dupont</h4>
+<p class="text-sm text-gray-600">Directrice, EduConnect</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-16 md:py-24 bg-white">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Parlons de Votre Projet</h2>
+<p class="text-lg text-gray-700 mb-8">
+Vous avez un projet en tête ? Je serais ravi d'en discuter et de voir comment je peux vous aider à le concrétiser. N'hésitez pas à me contacter via le formulaire ou directement par email ou téléphone.
+</p>
+<div class="space-y-6 mb-8">
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-4 mt-1">
+<i class="ri-mail-line"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+<p class="text-gray-700">johnzogli22@gmail.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-4 mt-1">
+<i class="ri-phone-line"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-1">Téléphone</h4>
+<p class="text-gray-700">+228 98 78 03 85 / 71 25 41 25</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-4 mt-1">
+<i class="ri-map-pin-line"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 mb-1">Localisation</h4>
+<p class="text-gray-700">Lome, Togo</p>
+</div>
+</div>
+</div>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-linkedin-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-github-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-dribbble-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+<i class="ri-behance-fill text-gray-700"></i>
+</a>
+</div>
+</div>
+<div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Envoyez-moi un message</h3>
+<form>
+<div class="mb-6">
+<label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+<input
+type="text"
+id="name"
+class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+placeholder="Votre nom"
+required
+>
+</div>
+<div class="mb-6">
+<label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+<input
+type="email"
+id="email"
+class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+placeholder="votre@email.com"
+required
+>
+</div>
+<div class="mb-6">
+<label for="subject" class="block text-gray-700 font-medium mb-2">Sujet</label>
+<input
+type="text"
+id="subject"
+class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+placeholder="Sujet de votre message"
+required
+>
+</div>
+<div class="mb-6">
+<label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+<textarea
+id="message"
+rows="5"
+class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+placeholder="Votre message..."
+required
+></textarea>
+</div>
+<div class="mb-6 flex items-center">
+<input type="checkbox" id="privacy" class="hidden" required>
+<div class="custom-checkbox"></div>
+<label for="privacy" class="ml-3 text-gray-700 cursor-pointer">
+J'accepte la politique de confidentialité
+</label>
+</div>
+<button
+type="submit"
+class="w-full bg-primary text-white py-3 !rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+>
+Envoyer le message
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-2">
+<a href="#" class="text-2xl font-['Pacifico'] text-white mb-4 inline-block">John</a>
+<p class="text-gray-400 mb-6 max-w-md">
+Développeur web senior et designer graphique spécialisé dans la création d'expériences digitales modernes et performantes.
+</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+<i class="ri-linkedin-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+<i class="ri-github-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+<i class="ri-dribbble-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+<i class="ri-behance-fill text-white"></i>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-6">Liens Rapides</h4>
+<ul class="space-y-3">
+<li><a href="#accueil" class="text-gray-400 hover:text-white transition-colors">Accueil</a></li>
+<li><a href="#projets" class="text-gray-400 hover:text-white transition-colors">Projets</a></li>
+<li><a href="#competences" class="text-gray-400 hover:text-white transition-colors">Compétences</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-6">Contact</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-mail-line"></i>
+</span>
+<span class="text-gray-400">johnzogli22@gmail.com</span>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-phone-line"></i>
+</span>
+<span class="text-gray-400">+228 98 78 03 85 / 71 25 41 25</span>
+</li>
+<li class="flex items-start">
+<span class="w-5 h-5 flex items-center justify-center mt-1 mr-2 text-primary">
+<i class="ri-map-pin-line"></i>
+</span>
+<span class="text-gray-400">Lome, Togo</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 mb-4 md:mb-0">
+&copy; 2025 John Zogli. Tous droits réservés.
+</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 hover:text-white transition-colors">Politique de confidentialité</a>
+<a href="#" class="text-gray-500 hover:text-white transition-colors">Mentions légales</a>
+</div>
+</div>
+</div>
+</footer>
+
+
+<!-- Scripts -->
+<script id="mobile-menu-script">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+// Toggle icon
+const icon = mobileMenuButton.querySelector('i');
+if (mobileMenu.classList.contains('hidden')) {
+icon.classList.remove('ri-close-line');
+icon.classList.add('ri-menu-line');
+} else {
+icon.classList.remove('ri-menu-line');
+icon.classList.add('ri-close-line');
+}
+});
+// Close mobile menu when clicking on a link
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+const icon = mobileMenuButton.querySelector('i');
+icon.classList.remove('ri-close-line');
+icon.classList.add('ri-menu-line');
+});
+});
+});
+</script>
+<script id="smooth-scroll-script">
+document.addEventListener('DOMContentLoaded', function() {
+const links = document.querySelectorAll('a[href^="#"]');
+links.forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+});
+</script>
+<script id="skills-animation-script">
+document.addEventListener('DOMContentLoaded', function() {
+const skillBars = document.querySelectorAll('.skill-bar');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.width = entry.target.parentElement.dataset.value || entry.target.style.width;
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+skillBars.forEach(bar => {
+// Initially set width to 0
+const originalWidth = bar.style.width;
+bar.style.width = '0';
+// Store the target width as a data attribute on the parent
+bar.parentElement.dataset.value = originalWidth;
+// Observe the bar
+observer.observe(bar);
+});
+});
+</script>
+<script id="form-interaction-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Custom checkbox functionality
+const checkbox = document.getElementById('privacy');
+const customCheckbox = document.getElementById('privacy').nextElementSibling;
+customCheckbox.addEventListener('click', function() {
+checkbox.checked = !checkbox.checked;
+// Update visual state
+if (checkbox.checked) {
+customCheckbox.classList.add('bg-primary');
+customCheckbox.classList.add('border-primary');
+} else {
+customCheckbox.classList.remove('bg-primary');
+customCheckbox.classList.remove('border-primary');
+}
+});
+// Form validation
+const contactForm = document.querySelector('form');
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+// Basic validation
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const subject = document.getElementById('subject').value;
+const message = document.getElementById('message').value;
+if (!name || !email || !subject || !message || !checkbox.checked) {
+alert('Veuillez remplir tous les champs et accepter la politique de confidentialité.');
+return;
+}
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+alert('Veuillez entrer une adresse email valide.');
+return;
+}
+// Here you would normally send the form data to a server
+alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
+contactForm.reset();
+});
+});
+</script>
+<script id="active-nav-script">
+document.addEventListener('DOMContentLoaded', function() {
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', function() {
+let current = '';
+sections.forEach(section => {
+const sectionTop = section.offsetTop - 100;
+const sectionHeight = section.offsetHeight;
+if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+current = section.getAttribute('id');
+}
+});
+navLinks.forEach(link => {
+link.classList.remove('active-nav');
+if (link.getAttribute('href') === `#${current}`) {
+link.classList.add('active-nav');
+}
+});
+});
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('projectModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const modalTech = document.getElementById('modalTech');
+  const closeModalBtn = document.getElementById('closeModal');
+  const openModalLinks = document.querySelectorAll('.open-modal');
+
+  openModalLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = link.getAttribute('data-title');
+      const description = link.getAttribute('data-description');
+      const image = link.getAttribute('data-image');
+      const tech = link.getAttribute('data-tech').split(',');
+
+      // Populate modal
+      modalImage.src = image;
+      modalImage.alt = title;
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+      modalTech.innerHTML = tech.map(t => `<span class="px-2 sm:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs sm:text-sm">${t}</span>`).join('');
+
+      // Show modal
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+  });
+
+  // Close modal
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    document.body.style.overflow = ''; // Restore background scroll
+  });
+
+  // Close modal on click outside
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = ''; // Restore background scroll
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = ''; // Restore background scroll
+    }
+  });
+});
+</script>
+</body>
+</html>
